@@ -2,7 +2,8 @@ package com.johnburitto.recycleviewexample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.johnburitto.recycleviewexample.adapter.ItemAdapter
 import com.johnburitto.recycleviewexample.data.Datasource
 
 class MainActivity : AppCompatActivity() {
@@ -10,8 +11,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView: TextView = findViewById(R.id.textview)
+        val dataset = Datasource().loadAffirmations()
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
 
-        textView.text = Datasource().loadAffirmations().size.toString();
+        recyclerView.adapter = ItemAdapter(this, dataset)
+        recyclerView.setHasFixedSize(true)
     }
 }
